@@ -6,7 +6,7 @@ import { getMessages, getUsersForSidebar, sendMessage } from "../controllers/mes
 const router = express.Router();
 
 router.get("/users", passport.authenticate('bearer', {session : false}), getUsersForSidebar);
-router.get("/:id", passport.authenticate('bearer', {session : false}), getMessages);
+router.get("/messages/:id", passport.authenticate('bearer', {session : false}), getMessages);
 
 router.post("/send/:id", passport.authenticate('bearer', {session : false}), sendMessage);
 

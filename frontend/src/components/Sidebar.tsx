@@ -39,7 +39,15 @@ const Sidebar = () => {
 
  // filter online users
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
-  const [selectedUser, setSelectedUser] = useState();
+  // Define the OnlineUser type if not already imported
+  type OnlineUser = {
+    id: string;
+    name: string;
+    profilePic?: string;
+    // add other properties as needed
+  };
+
+  const [selectedUser, setSelectedUser] = useState<OnlineUser | undefined>();
 
   
 
@@ -84,7 +92,7 @@ const Sidebar = () => {
                 alt={user.name}
                 className="size-12 object-cover rounded-full"
               />
-              {onlineUsers.includes(user.id) && (
+              {onlineUsers.some(u => u.id === user.id) && (
                 <span
                   className="absolute bottom-0 right-0 size-3 bg-green-500 
                   rounded-full ring-2 ring-zinc-900"
@@ -96,7 +104,7 @@ const Sidebar = () => {
             <div className="hidden lg:block text-left min-w-0">
               <div className="font-medium truncate">{user.name}</div>
               <div className="text-sm text-zinc-400">
-                {onlineUsers.includes(user.id) ? "Online" : "Offline"}
+                {onlineUsers.some(u => u.id === user.id) ? "Online" : "Offline"}
               </div>
             </div>
           </button>

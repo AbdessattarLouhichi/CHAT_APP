@@ -1,12 +1,12 @@
 
 import Message from '../models/message.model.js'
 import cloudinary from "../config/cloudinary.js";
-//import { getReceiverSocketId, io } from "../lib/socket.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const getMessages = async (req, res) => {
     try {
       const { id: userToChatId } = req.params;
-  
+        const myId = req.user._id;
       const myMessages = await Message.find({
         $or: [
           { senderId: myId, receiverId: userToChatId },

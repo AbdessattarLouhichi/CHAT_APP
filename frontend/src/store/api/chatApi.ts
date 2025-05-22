@@ -5,9 +5,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 // Thunk get messages
 export const getMessages = createAsyncThunk(
     'chat/getMessages',
-    async (chatId: string, { rejectWithValue }) => {
+    async (userToChatId: string, { rejectWithValue }) => {
       try {
-        const response = await axios.get(`/chats/${chatId}/messages`);
+        const response = await axios.get(`/messages/${userToChatId}`);
         return response.data;
       } catch (error: any) {
         return rejectWithValue(error.response.data);
@@ -20,9 +20,9 @@ export const getMessages = createAsyncThunk(
 // Thunk Send message
 export const sendMessage = createAsyncThunk(
     'chat/postMessage',
-    async ({ chatId, message }: { chatId: string; message: { content: string; senderId: string } }, { rejectWithValue }) => {
+    async ({ userToChatId, message }: { userToChatId: string; message: { content: string; senderId: string } }, { rejectWithValue }) => {
       try {
-        const response = await axios.post(`/chats/${chatId}/messages`, message);
+        const response = await axios.post(`/send/${userToChatId}`, message);
         return response.data;
       } catch (error: any) {
         return rejectWithValue(error.response.data);

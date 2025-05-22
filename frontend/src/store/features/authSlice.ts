@@ -12,6 +12,8 @@ type UserInfo = {
 type OnlineUser = {
     id: string;
     name: string;
+    profilePic?: string;
+    // add other properties as needed
 };
 type AuthState = {
     loading: boolean;
